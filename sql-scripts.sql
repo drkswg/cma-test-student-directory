@@ -1,3 +1,5 @@
+--PostgreSQL10
+
 CREATE DATABASE "student_directory";
 
 CREATE USER tester WITH PASSWORD 'test_password';
