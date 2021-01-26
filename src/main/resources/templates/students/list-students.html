@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список студентов</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <h3>Список студентов</h3>
+    <hr>
+    <a th:href="@{/students/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
+        Добавить студента
+    </a>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th>Дата рождения</th>
+        <th>Группа</th>
+        <th>Действия</th>
+        </thead>
+        <tbody>
+        <tr th:each="tempStudent : ${students}">
+            <td th:text="${tempStudent.firstName}"/>
+            <td th:text="${tempStudent.lastName}"/>
+            <td th:text="${tempStudent.patronymic}"/>
+            <td th:text="${tempStudent.birthDate}"/>
+            <td th:text="${tempStudent.studyGroup}"/>
+            <td>
+                <a th:href="@{/students/showFormForUpdate(studentId=${tempStudent.id})}"
+                   class="btn btn-info btn-sm">
+                    Обновить
+                </a>
+
+                <a th:href="@{/students/delete(studentId=${tempStudent.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Вы точно хотите удалить данного студента?'))) return false">
+                    Удалить
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
